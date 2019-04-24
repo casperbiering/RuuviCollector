@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  ruuvicollector:
+    image: casperbiering/ruuvicollector:latest
+    privileged: true
+    network_mode: host
+    volumes:
+      - ./ruuvi-collector.properties:/app/ruuvi-collector.properties
+      - ./ruuvi-names.properties:/app/ruuvi-names.properties
+    restart: always
+
+  influxdb:
+    image: influxdb
+    volumes:
+      - ./influxdb:/var/lib/influxdb
+    ports:
+      - 8086:8086
+    restart: always
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./grafana-storage:/var/lib/grafana
+    restart: always
+    ports:
+      - 3000:3000
