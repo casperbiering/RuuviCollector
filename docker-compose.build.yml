@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+
+  onpi:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: casperbiering/ruuvicollector:latest
+
+  crossbuild:
+    build:
+      dockerfile: Dockerfile.crossbuild
+      context: .
+    image: casperbiering/ruuvicollector:latest
